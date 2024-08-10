@@ -1,4 +1,4 @@
-package br.com.microservices.orchestrated.orderservice.config.kafka;
+package br.com.microservices.orchestrated.paymentservice.config.kafka;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -61,7 +61,7 @@ public class KafkaConfig {
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-
+        
         return new KafkaTemplate<>(producerFactory());
     }
 }
