@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+kafka:
+  bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+  consumer:
+    group-id: orchestrator-group
+    auto-offset-reset: latest
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF
