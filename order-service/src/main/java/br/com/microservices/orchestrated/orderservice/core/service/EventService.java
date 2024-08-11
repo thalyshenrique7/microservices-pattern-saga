@@ -52,7 +52,7 @@ public class EventService {
 
     private Event findByTransactionId(String transactionId) {
 
-        return this.eventRepository.findTop1ByTransactionIdOrderByCreatedAtDesc(transactionId).orElseThrow(() -> new ValidationException("Event not found by orderID."));
+        return this.eventRepository.findTop1ByTransactionIdOrderByCreatedAtDesc(transactionId).orElseThrow(() -> new ValidationException("Event not found by transactionID."));
     }
 
     private void validateEmptyFilters(EventFilters filters) {

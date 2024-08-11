@@ -7,12 +7,14 @@ import br.com.microservices.orchestrated.orderservice.core.producer.SagaProducer
 import br.com.microservices.orchestrated.orderservice.core.repository.OrderRepository;
 import br.com.microservices.orchestrated.orderservice.core.utils.JsonUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class OrderService {
@@ -33,7 +35,7 @@ public class OrderService {
                 .build();
 
         orderRepository.save(order);
-        sagaProducer.sendEvent(jsonUtil.toJson(order));
+        sagaProducer.sendEvent(jsonUtil.toJson(createPayload(order)));
         return order;
     }
 
