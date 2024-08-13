@@ -74,8 +74,9 @@ public class ProductValidationService {
 
     private void validateExistingProduct(String code) {
 
-        if (productRepository.existsByCode(code))
+        if (!productRepository.existsByCode(code))
             throw new ValidationException("Product does not exists in database!");
+        
     }
 
     private void createValidation(Event event, boolean success) {
