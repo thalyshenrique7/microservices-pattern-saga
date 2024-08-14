@@ -49,10 +49,17 @@ public class PaymentService {
 
     public void realizeRefund(Event event) {
 
-        this.changePaymentStatusToRefund(event);
         event.setStatus(ESagaStatus.FAIL);
         event.setSource(CURRENT_SOURCE);
-        addHistory(event, "Rollback executed for payment!");
+
+        try {
+
+            this.changePaymentStatusToRefund(event);
+            addHistory(event, "Rollback executed for payment!");
+
+        } catch (Exception e) {
+            addHistory(event, "Rollback not executed for payment!");
+        }
         kafkaProducer.sendEvent(jsonUtil.toJson(event));
     }
 
@@ -94,13 +101,13 @@ public class PaymentService {
                 .getProducts()
                 .stream()
                 .map(OrderProducts::getQuantity)
-                .reduce(0, Integer::sum);
+                .reduce(REDUCE_SUM_VALUE.intValue(), Integer::sum);
     }
 
     private void setEventAmountItems(Event event, Payment payment) {
 
-        payment.setTotalAmount(payment.getTotalAmount());
-        payment.setTotalItems(payment.getTotalItems());
+        event.getPayload().setTotalAmount(payment.getTotalAmount());
+        event.getPayload().setTotalItems(payment.getTotalItems());
     }
 
     private void validateAmount(double amount) {
