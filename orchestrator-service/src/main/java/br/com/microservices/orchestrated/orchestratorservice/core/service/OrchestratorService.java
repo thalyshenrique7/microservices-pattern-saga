@@ -79,6 +79,6 @@ public class OrchestratorService {
     }
 
     private void sendToOrchestratorProducerWithTopic(Event event, ETopic topic) {
-        this.sagaOrchestratorProducer.sendEvent(jsonUtil.toJson(event), topic.getTopic());
+        this.sagaOrchestratorProducer.sendEvent(this.jsonUtil.toJson(event), topic.getTopic());
     }
 }

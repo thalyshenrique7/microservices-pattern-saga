@@ -6,7 +6,6 @@ import br.com.microservices.orchestrated.orchestratorservice.core.enums.ETopic;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.ObjectError;
 
 import java.util.Arrays;
 
