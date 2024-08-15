@@ -34,6 +34,4 @@ public class Event {
 
         eventHistory.add(history);
     }
-
-
 }
